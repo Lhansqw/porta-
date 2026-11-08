@@ -14,9 +14,9 @@ const config: Config = {
         coral: "#FF5A3C",
       },
       fontFamily: {
-        display: ["Fraunces", "Georgia", "serif"],
-        body: ["DM Sans", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
     },
   },
