@@ -7,7 +7,9 @@ export type Proyecto = {
   estado: "En desarrollo" | "Colaboración" | "Académico";
   categorias: Categoria[];
   descripcion: string;
-  puntos: string[];
+  problema: string;
+  propuesta: string;
+  resultado: string;
   stack: string[];
   /** Archivo en /public/arte, o "fefo" para la demo interactiva. */
   arte: string;
@@ -24,13 +26,10 @@ export const proyectos: Proyecto[] = [
     etiqueta: "escritorio · Windows",
     estado: "En desarrollo",
     categorias: ["escritorio"],
-    descripcion:
-      "Aplicación de escritorio que analiza repositorios de GitHub o locales y mide su deuda técnica, con IA integrada.",
-    puntos: [
-      "Inicio de sesión con cuentas en la nube (Supabase, PostgreSQL)",
-      "La IA funciona de entrada: el usuario no configura claves",
-      "Historial de commits construido paso a paso",
-    ],
+    descripcion: "Aplicación de escritorio que analiza repositorios de GitHub o locales y mide su deuda técnica, con IA integrada.",
+    problema: "Medir la deuda técnica de un repositorio es un trabajo manual que obliga a configurar varias herramientas.",
+    propuesta: "Una aplicación de escritorio para Windows que analiza el repositorio y explica los resultados con IA.",
+    resultado: "La IA funciona de entrada, sin que el usuario configure claves, y las cuentas se guardan en la nube con Supabase.",
     stack: ["TypeScript", "Supabase", "Groq", "OpenRouter"],
     arte: "radar.svg",
     fondo: "#0A0E2A",
@@ -44,12 +43,10 @@ export const proyectos: Proyecto[] = [
     estado: "Colaboración",
     categorias: ["web"],
     descripcion:
-      "Plataforma web de acompañamiento emocional con IA. Lee la expresión del usuario con la cámara, conversa con distintas personalidades terapéuticas y resume su estado de ánimo en un panel clínico. Colaboré de forma activa en el frontend y el backend.",
-    puntos: [
-      "Detección de emociones en tiempo real con face-api.js",
-      "Chat con enfoque TCC o humanista, y alertas de riesgo",
-      "API REST con JWT y datos en PostgreSQL (Supabase)",
-    ],
+      "Plataforma web de acompañamiento emocional con IA. Colaboré de forma activa en el frontend y el backend.",
+    problema: "El acompañamiento emocional no siempre está al alcance y las señales de estrés o riesgo pasan desapercibidas.",
+    propuesta: "Una plataforma que combina cámara, chat con IA y un panel clínico del estado de ánimo.",
+    resultado: "Detección de emociones en tiempo real, chat con enfoque TCC o humanista, alertas de riesgo y acceso protegido.",
     stack: ["React", "TypeScript", "Vite", "Java 21", "Spring Boot", "Gemini", "Groq"],
     arte: "mindsee.svg",
     fondo: "#14456F",
@@ -66,9 +63,10 @@ export const proyectos: Proyecto[] = [
     etiqueta: "escritorio",
     estado: "En desarrollo",
     categorias: ["escritorio"],
-    descripcion:
-      "Punto de venta de escritorio e inventario para una droguería en Colombia, de un solo usuario y en modo kiosco.",
-    puntos: ["Inventario por lotes con salida FEFO: primero vence, primero sale", "Base de datos local con SQLite"],
+    descripcion: "Punto de venta e inventario para una droguería en Colombia. Prueba al lado cómo decide de qué lote sale cada venta.",
+    problema: "Una droguería necesita vender rápido y no perder producto por vencimiento.",
+    propuesta: "Un punto de venta de escritorio en modo kiosco, de un solo usuario, con inventario por lotes.",
+    resultado: "Cada venta descuenta del lote que vence primero, con los datos guardados en el equipo y sin depender de internet.",
     stack: ["Electron", "React", "TypeScript", "SQLite", "Zustand", "Tailwind CSS"],
     arte: "fefo",
   },
@@ -78,9 +76,10 @@ export const proyectos: Proyecto[] = [
     etiqueta: "móvil · Android",
     estado: "En desarrollo",
     categorias: ["movil"],
-    descripcion:
-      "App Android que reconoce señas de LSC con la cámara y las convierte en texto en español con ayuda de IA. Se construye por fases.",
-    puntos: ["Reconocimiento con la cámara del teléfono", "IA en la nube con Gemini"],
+    descripcion: "App Android que reconoce señas de LSC con la cámara y las convierte en texto en español.",
+    problema: "Comunicarse con una persona que usa LSC exige conocer la lengua o contar con un intérprete.",
+    propuesta: "Una app que reconoce las señas con la cámara del teléfono y las traduce a texto.",
+    resultado: "Se construye por fases: primero el reconocimiento con la cámara, después la traducción con IA (Gemini).",
     stack: ["Kotlin", "Android", "Gemini", "Visión por computador"],
     arte: "lsc.svg",
     fondo: "#FF5A3C",
@@ -91,9 +90,10 @@ export const proyectos: Proyecto[] = [
     etiqueta: "web · backend",
     estado: "Académico",
     categorias: ["web", "academico"],
-    descripcion:
-      "Sistema de tablero Kanban universitario. Diseñé su arquitectura completa y la documenté en un conjunto de diagramas técnicos.",
-    puntos: ["Diagramas de arquitectura, componentes y datos", "Backend por capas con persistencia JPA"],
+    descripcion: "Sistema de tablero Kanban universitario, del que diseñé y documenté la arquitectura completa.",
+    problema: "Un sistema con muchas partes se vuelve difícil de explicar y de sustentar.",
+    propuesta: "Modelar antes de programar: un backend por capas con persistencia JPA.",
+    resultado: "Diagramas de arquitectura, componentes y datos, listos para exponer.",
     stack: ["Java", "Spring Boot", "JPA", "Tailwind CSS"],
     arte: "kanban.svg",
     fondo: "#19C39B",
@@ -104,9 +104,10 @@ export const proyectos: Proyecto[] = [
     etiqueta: "modelado",
     estado: "Académico",
     categorias: ["academico"],
-    descripcion:
-      "Modelado de un sistema de envíos y mensajería urbana: casos de uso, clases, secuencia y estados, preparado para exposición.",
-    puntos: ["Diagramas UML completos y consistentes entre sí", "Presentación visual clara para sustentación"],
+    descripcion: "Modelado de un sistema de envíos y mensajería urbana, preparado para exposición.",
+    problema: "Un sistema de envíos tiene muchos actores y estados que hay que entender antes de construirlo.",
+    propuesta: "Modelado UML completo: casos de uso, clases, secuencia y estados.",
+    resultado: "Diagramas consistentes entre sí y una presentación clara para la sustentación.",
     stack: ["UML", "Análisis", "Diseño de software"],
     arte: "uml.svg",
     fondo: "#2233FF",

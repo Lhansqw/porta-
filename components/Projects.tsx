@@ -77,16 +77,18 @@ export default function Projects() {
                     {p.titulo}
                   </h3>
                   <p className="mt-4 text-cream/80">{p.descripcion}</p>
-                  <ul className="mt-5 grid gap-2 text-sm text-cream/90">
-                    {p.puntos.map((pt) => (
-                      <li key={pt} className="flex gap-3">
-                        <svg viewBox="0 0 24 24" aria-hidden="true" className="mt-0.5 h-4 w-4 flex-none text-sun" fill="currentColor">
-                          <path d="M12 0C12.6 6.5 17.5 11.4 24 12C17.5 12.6 12.6 17.5 12 24C11.4 17.5 6.5 12.6 0 12C6.5 11.4 11.4 6.5 12 0Z" />
-                        </svg>
-                        {pt}
-                      </li>
+                  <dl className="mt-5 grid gap-3 text-sm leading-snug text-cream/90">
+                    {[
+                      ["Problema", p.problema],
+                      ["Propuesta", p.propuesta],
+                      ["Resultado", p.resultado],
+                    ].map(([titulo, texto]) => (
+                      <div key={titulo}>
+                        <dt className="font-bold text-sun">{titulo}</dt>
+                        <dd>{texto}</dd>
+                      </div>
                     ))}
-                  </ul>
+                  </dl>
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {p.stack.map((st) => (
                       <li key={st} className="rounded-full bg-cream/10 px-3 py-1 font-mono text-xs">{st}</li>
