@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-padding-top: 5rem; }
+[hidden] { display: none !important; }
+body { @apply bg-ink font-body text-cream antialiased; }
+::selection { background: #FDB515; color: #0B0B0B; }
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-6xl;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .section { @apply py-20 md:py-28; }
+  .eyebrow { @apply font-mono text-xs uppercase tracking-[0.18em]; }
+  .h2 { @apply font-display text-4xl font-black leading-[0.95] tracking-tight md:text-6xl; text-wrap: balance; }
+  .btn { @apply inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5; }
+  .btn-sun { @apply border-ink bg-sun text-ink shadow-[4px_4px_0_#0B0B0B] hover:shadow-[6px_6px_0_#0B0B0B]; }
+  .btn-line { @apply border-cream text-cream hover:bg-cream hover:text-ink; }
+  .pill { @apply inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm text-cream; }
+  .text-outline { color: transparent; -webkit-text-stroke: 2px #FDB515; }
+  .focus-ring { @apply focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-sun; }
+}
+a, button, input, select, textarea { @apply focus-ring; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  * { animation: none !important; transition: none !important; }
+}
