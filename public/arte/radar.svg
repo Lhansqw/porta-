@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px}
+.sweep{transform-box:view-box;transform-origin:160px 90px;animation:spin 5s linear infinite}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.d2{animation-delay:.8s}.d3{animation-delay:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sweep,.ping{animation:none}}
+</style><rect width="320" height="180" fill="#0A0E2A"/>
+            <defs>
+              <linearGradient id="sw" gradientUnits="userSpaceOnUse" x1="160" y1="20" x2="209.5" y2="40.5">
+                <stop offset="0" stop-color="#FFD60A" stop-opacity="0"/>
+                <stop offset="1" stop-color="#FFD60A" stop-opacity=".55"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="#fff" stroke-opacity=".22">
+              <circle cx="160" cy="90" r="20"/><circle cx="160" cy="90" r="45"/><circle cx="160" cy="90" r="70"/>
+              <path d="M160 12V168M82 90H238"/>
+            </g>
+            <g class="sweep">
+              <path d="M160 90 L160 20 A70 70 0 0 1 209.5 40.5 Z" fill="url(#sw)"/>
+              <line x1="160" y1="90" x2="209.5" y2="40.5" stroke="#FFD60A" stroke-width="1.5"/>
+            </g>
+            <g>
+              <circle class="ping" cx="205" cy="62" r="3" fill="#FF5A3C"/><circle cx="205" cy="62" r="4" fill="#FF5A3C"/>
+              <circle class="ping d2" cx="122" cy="70" r="3" fill="#FF5A3C"/><circle cx="122" cy="70" r="4" fill="#FF5A3C"/>
+              <circle class="ping d3" cx="186" cy="122" r="3" fill="#FFD60A"/><circle cx="186" cy="122" r="4" fill="#FFD60A"/>
+              <circle cx="112" cy="116" r="3" fill="#19C39B"/>
+            </g>
+            <g fill="#fff">
+              <text x="212" y="59">complejidad</text>
+              <text x="115" y="66" text-anchor="end">duplicación</text>
+              <text x="193" y="125">acoplamiento</text>
+              <text x="105" y="119" text-anchor="end" fill-opacity=".7">sano</text>
+            </g>
+          </svg>

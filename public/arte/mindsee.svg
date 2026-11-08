@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px}
+.sweep{transform-box:view-box;transform-origin:160px 90px;animation:spin 5s linear infinite}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.d2{animation-delay:.8s}.d3{animation-delay:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sweep,.ping{animation:none}}
+</style><defs><linearGradient id="bgm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A1B6B"/><stop offset="1" stop-color="#0B6F6A"/></linearGradient></defs><rect width="320" height="180" fill="url(#bgm)"/>
+            <g fill="none" stroke="#FFD60A" stroke-width="3" stroke-linecap="square">
+              <path d="M22 44V26H40M118 26H136V44M136 126V144H118M40 144H22V126"/>
+            </g>
+            <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="79" cy="85" r="34"/>
+              <path d="M64 96Q79 110 94 96"/>
+            </g>
+            <g fill="#fff">
+              <circle cx="68" cy="76" r="3.5"/><circle cx="90" cy="76" r="3.5"/>
+              <circle cx="79" cy="86" r="1.8"/><circle cx="58" cy="92" r="1.8"/><circle cx="100" cy="92" r="1.8"/>
+            </g>
+            <rect x="22" y="152" width="114" height="18" fill="#FFD60A"/>
+            <text x="29" y="164.5" fill="#14120A" font-weight="700">emoción detectada</text>
+            <g fill="none" stroke="#fff" stroke-opacity=".28">
+              <path d="M170 30V130H300"/>
+              <path d="M170 55H300M170 80H300M170 105H300" stroke-dasharray="2 4"/>
+            </g>
+            <polyline points="170,112 190,98 210,116 230,84 250,92 270,62 285,70 300,46" fill="none" stroke="#19F0C0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="300" cy="46" r="5" fill="#19F0C0"/>
+            <circle class="ping" cx="300" cy="46" r="5" fill="#19F0C0"/>
+            <text x="170" y="22" fill="#fff" font-weight="700">ánimo · últimos 10 días</text>
+            <text x="170" y="147" fill="#fff" fill-opacity=".7">día 1</text>
+            <text x="300" y="147" fill="#fff" fill-opacity=".7" text-anchor="end">día 10</text>
+          </svg>

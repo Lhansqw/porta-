@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px}
+.sweep{transform-box:view-box;transform-origin:160px 90px;animation:spin 5s linear infinite}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.d2{animation-delay:.8s}.d3{animation-delay:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sweep,.ping{animation:none}}
+</style>
+<rect width="320" height="180" fill="#19C39B"/>
+<g font-weight="700" fill="#0A0E2A">
+<g transform="translate(18,22)"><rect width="86" height="136" fill="#0A0E2A" fill-opacity=".14"/><text x="8" y="14" font-size="8">POR HACER</text>
+<rect x="8" y="24" width="70" height="30" fill="#fff" stroke="#0A0E2A" stroke-width="2"/><rect x="14" y="31" width="58" height="5" fill="#0A0E2A"/><rect x="14" y="42" width="34" height="5" fill="#0A0E2A" fill-opacity=".4"/>
+<rect x="8" y="62" width="70" height="30" fill="#fff" stroke="#0A0E2A" stroke-width="2"/><rect x="14" y="69" width="58" height="5" fill="#0A0E2A"/><rect x="14" y="80" width="34" height="5" fill="#0A0E2A" fill-opacity=".4"/></g>
+<g transform="translate(117,22)"><rect width="86" height="136" fill="#0A0E2A" fill-opacity=".14"/><text x="8" y="14" font-size="8">EN CURSO</text>
+<g transform="rotate(-4 43 40)"><rect x="12" y="24" width="70" height="30" fill="#fff" stroke="#0A0E2A" stroke-width="2"/><rect x="18" y="31" width="58" height="5" fill="#0A0E2A"/><rect x="18" y="42" width="34" height="5" fill="#0A0E2A" fill-opacity=".4"/><rect x="15" y="27" width="70" height="30" fill="none" stroke="#0A0E2A" stroke-width="2" opacity=".35"/></g></g>
+<g transform="translate(216,22)"><rect width="86" height="136" fill="#0A0E2A" fill-opacity=".14"/><text x="8" y="14" font-size="8">HECHO</text>
+<rect x="8" y="24" width="70" height="30" fill="#fff" stroke="#0A0E2A" stroke-width="2"/><rect x="14" y="31" width="58" height="5" fill="#0A0E2A"/><rect x="14" y="42" width="34" height="5" fill="#0A0E2A" fill-opacity=".4"/></g>
+</g></svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px}
+.sweep{transform-box:view-box;transform-origin:160px 90px;animation:spin 5s linear infinite}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.d2{animation-delay:.8s}.d3{animation-delay:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sweep,.ping{animation:none}}
+</style><rect width="320" height="180" fill="#2233FF"/>
+            <defs>
+              <marker id="arw" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#fff"/></marker>
+            </defs>
+            <g stroke="#fff" stroke-width="2" fill="none">
+              <line x1="74" y1="21" x2="74" y2="38" marker-end="url(#arw)"/>
+              <line x1="124" y1="57" x2="194" y2="57" marker-end="url(#arw)"/>
+              <line x1="246" y1="76" x2="246" y2="120" marker-end="url(#arw)"/>
+              <line x1="194" y1="139" x2="126" y2="139" marker-end="url(#arw)"/>
+            </g>
+            <circle cx="74" cy="16" r="5" fill="#fff"/>
+            <g fill="#fff" stroke="#0A0E2A" stroke-width="2">
+              <rect x="24" y="40" width="100" height="34"/>
+              <rect x="196" y="40" width="100" height="34"/>
+              <rect x="196" y="122" width="100" height="34"/>
+              <rect x="24" y="122" width="100" height="34"/>
+            </g>
+            <rect x="28" y="126" width="92" height="26" fill="none" stroke="#0A0E2A" stroke-width="1"/>
+            <g fill="#0A0E2A" font-weight="700" text-anchor="middle" font-size="10">
+              <text x="74" y="61">Recibido</text>
+              <text x="246" y="61">Asignado</text>
+              <text x="246" y="143">En ruta</text>
+              <text x="74" y="143">Entregado</text>
+            </g>
+            <g fill="#fff" fill-opacity=".85">
+              <text x="159" y="50" text-anchor="middle">asignar</text>
+              <text x="254" y="102">recoger</text>
+              <text x="160" y="153" text-anchor="middle">entregar</text>
+            </g>
+          </svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px}
+.sweep{transform-box:view-box;transform-origin:160px 90px;animation:spin 5s linear infinite}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.d2{animation-delay:.8s}.d3{animation-delay:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sweep,.ping{animation:none}}
+</style><rect width="320" height="180" fill="#FF5A3C"/>
+            <defs>
+              <marker id="dot" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="5" refY="5">
+                <circle cx="5" cy="5" r="3.2" fill="#fff" stroke="#0A0E2A" stroke-width="1.5"/>
+              </marker>
+            </defs>
+            <g fill="none" stroke="#0A0E2A" stroke-width="2.5">
+              <path d="M12 30V12H30M290 12H308V30M308 150V168H290M30 168H12V150"/>
+            </g>
+            <g transform="translate(34,0)" fill="none" stroke="#0A0E2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="128,145 140,110 160,105 180,110 198,122 188,155 160,165" fill="#fff" fill-opacity=".28" stroke-width="2.5"/>
+              <polyline points="128,145 106,126 92,104 84,86" marker-start="url(#dot)" marker-mid="url(#dot)" marker-end="url(#dot)"/>
+              <polyline points="140,110 134,80 131,55 129,32" marker-start="url(#dot)" marker-mid="url(#dot)" marker-end="url(#dot)"/>
+              <polyline points="160,105 160,72 160,45 160,20" marker-start="url(#dot)" marker-mid="url(#dot)" marker-end="url(#dot)"/>
+              <polyline points="180,110 186,80 190,56 192,34" marker-start="url(#dot)" marker-mid="url(#dot)" marker-end="url(#dot)"/>
+              <polyline points="198,122 210,98 218,80 224,62" marker-start="url(#dot)" marker-mid="url(#dot)" marker-end="url(#dot)"/>
+            </g>
+            <rect x="18" y="140" width="112" height="20" fill="#0A0E2A"/>
+            <text x="25" y="153.5" fill="#fff">seña → texto en español</text>
+            <text x="24" y="40" fill="#0A0E2A" font-weight="700">CÁMARA</text>
+          </svg>
