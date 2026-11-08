@@ -14,14 +14,6 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
       .from("[data-hero-block]", { y: 60, opacity: 0, duration: 0.8 }, "-=0.6")
       .from("[data-sparkle]", { scale: 0, rotate: -90, duration: 0.7, ease: "back.out(2)" }, "-=0.4");
 
-    gsap.utils.toArray("[data-parallax]").forEach((el: any) => {
-      gsap.to(el, {
-        yPercent: -20,
-        ease: "none",
-        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-      });
-    });
-
     // Barra de progreso de lectura
     gsap.to("[data-progress]", {
       scaleX: 1,
@@ -29,23 +21,12 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
       scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.2 },
     });
 
-    // Apariciones al hacer scroll
+    // Los títulos de sección y los proyectos aparecen al llegar a ellos
     ScrollTrigger.batch("[data-reveal]", {
       start: "top 92%",
       once: true,
       onEnter: (batch: any) =>
         gsap.from(batch, { y: 48, opacity: 0.15, duration: 0.8, stagger: 0.12, ease: "power3.out", clearProps: "transform,opacity" }),
-    });
-    gsap.utils.toArray("[data-stagger]").forEach((group: any) => {
-      gsap.from(group.children, {
-        y: 26,
-        opacity: 0.15,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        clearProps: "transform,opacity",
-        scrollTrigger: { trigger: group, start: "top 90%", once: true },
-      });
     });
   });
 

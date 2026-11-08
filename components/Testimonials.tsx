@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { relaciones, testimoniosFijos, type Testimonio } from "@/data/testimonials";
-import Sparkle from "./Sparkle";
 
 export default function Testimonials() {
   const [remotos, setRemotos] = useState<Testimonio[]>([]);
@@ -54,15 +53,14 @@ export default function Testimonials() {
     <section id="testimonios" className="section bg-forest text-cream">
       <div className="wrap">
         <h2 data-reveal className="h2">{lista.length > 0 ? "Lo que dicen de mi trabajo" : "Deja tu testimonio"}</h2>
-        <p data-reveal className="mt-4 max-w-[48ch] text-cream/75">
+        <p className="mt-4 max-w-[48ch] text-cream/75">
           Si trabajamos juntos en un proyecto o una clase, déjame unas palabras. Se publican después de revisarlas.
         </p>
 
         {lista.length > 0 && (
-        <ul data-stagger id="lista-testimonios" className="mt-10 grid gap-6 md:grid-cols-3">
+        <ul id="lista-testimonios" className="mt-10 grid gap-6 md:grid-cols-3">
           {lista.map((t) => (
             <li key={t.id} className="flex flex-col gap-4 bg-cream p-6 text-ink">
-              <Sparkle className="h-6 w-6 text-coral" />
               <blockquote className="text-lg leading-snug">“{t.mensaje}”</blockquote>
               <p className="mt-auto font-mono text-xs uppercase tracking-wider">
                 <span className="font-bold">{t.nombre}</span> · {t.relacion}
@@ -75,7 +73,6 @@ export default function Testimonials() {
         <form
           id="form-testimonio"
           onSubmit={enviar}
-          data-reveal
           aria-label="Deja tu testimonio"
           className="mt-10 grid gap-5 bg-black p-6 md:grid-cols-2 md:p-8"
         >

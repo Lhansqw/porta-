@@ -18,13 +18,12 @@ export default function Projects() {
   return (
     <section id="proyectos" className="section bg-ink text-cream">
       <div className="wrap">
-        <p data-reveal className="eyebrow text-sun">Mis proyectos</p>
-        <h2 data-reveal className="h2 mt-3">Galería de proyectos</h2>
-        <p data-reveal className="mt-4 max-w-[46ch] text-cream/70">
+        <h2 data-reveal className="h2">Galería de proyectos</h2>
+        <p className="mt-4 max-w-[46ch] text-cream/70">
           Productos funcionales y trabajo académico de diseño de software.
         </p>
 
-        <div data-reveal role="group" aria-label="Filtrar proyectos" className="mt-8 flex flex-wrap gap-3">
+        <div role="group" aria-label="Filtrar proyectos" className="mt-8 flex flex-wrap gap-3">
           {filtros.map((f) => (
             <button
               key={f.id}
@@ -98,7 +97,7 @@ export default function Projects() {
                     <div className="mt-6 flex flex-wrap gap-3">
                       {p.enlaces.map((e) => (
                         <a key={e.href} href={e.href} target="_blank" rel="noopener noreferrer" className="btn btn-line !py-2">
-                          {e.texto} ↗
+                          {e.texto}
                         </a>
                       ))}
                     </div>

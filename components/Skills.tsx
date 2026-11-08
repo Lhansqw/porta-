@@ -8,7 +8,7 @@ export default function Skills() {
 
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {grupos.map((g) => (
-            <div key={g.titulo} data-reveal>
+            <div key={g.titulo}>
               <h3 className="border-b-2 border-cream/40 pb-2 font-display text-xl font-bold">{g.titulo}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {g.items.map((i) => (

@@ -35,7 +35,7 @@ export default function Navbar() {
             </a>
           ))}
           <a href={perfil.cv} download data-cv className="btn btn-sun !py-2">
-            CV ↓
+            CV
           </a>
         </nav>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
           ))}
           <li className="pt-2">
             <a href={perfil.cv} download data-cv className="btn btn-sun">
-              Descargar CV ↓
+              Descargar CV
             </a>
           </li>
         </ul>
