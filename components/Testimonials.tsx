@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { relaciones, testimoniosFijos, type Testimonio } from "@/data/testimonials";
 import Sparkle from "./Sparkle";
 
-const MINIMO = 3;
-
 export default function Testimonials() {
   const [remotos, setRemotos] = useState<Testimonio[]>([]);
   const [activo, setActivo] = useState<boolean | null>(null);
@@ -28,7 +26,6 @@ export default function Testimonials() {
   }, []);
 
   const lista = [...testimoniosFijos, ...remotos];
-  const vacios = Math.max(0, MINIMO - lista.length);
 
   async function enviar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,12 +53,12 @@ export default function Testimonials() {
   return (
     <section id="testimonios" className="section bg-forest text-cream">
       <div className="wrap">
-        <p data-reveal className="eyebrow text-sun">Testimonios</p>
-        <h2 data-reveal className="h2 mt-3">Lo que dicen de mi trabajo</h2>
+        <h2 data-reveal className="h2">{lista.length > 0 ? "Lo que dicen de mi trabajo" : "Deja tu testimonio"}</h2>
         <p data-reveal className="mt-4 max-w-[48ch] text-cream/75">
           Si trabajamos juntos en un proyecto o una clase, déjame unas palabras. Se publican después de revisarlas.
         </p>
 
+        {lista.length > 0 && (
         <ul data-stagger id="lista-testimonios" className="mt-10 grid gap-6 md:grid-cols-3">
           {lista.map((t) => (
             <li key={t.id} className="flex flex-col gap-4 bg-cream p-6 text-ink">
@@ -72,25 +69,16 @@ export default function Testimonials() {
               </p>
             </li>
           ))}
-          {Array.from({ length: vacios }).map((_, i) => (
-            <li key={`vacio-${i}`} data-vacio className="flex min-h-[200px] flex-col items-start justify-between gap-4 border-2 border-dashed border-cream/50 p-6">
-              <Sparkle className="h-6 w-6 text-sun" />
-              <p className="text-cream/80">Este espacio es para tu testimonio. Escríbelo con el formulario de abajo.</p>
-              <p className="font-mono text-xs uppercase tracking-wider text-sun">Pendiente</p>
-            </li>
-          ))}
         </ul>
+        )}
 
         <form
           id="form-testimonio"
           onSubmit={enviar}
           data-reveal
-          className="mt-12 grid gap-5 bg-black p-6 md:grid-cols-2 md:p-8"
+          aria-label="Deja tu testimonio"
+          className="mt-10 grid gap-5 bg-black p-6 md:grid-cols-2 md:p-8"
         >
-          <div className="md:col-span-2">
-            <h3 className="font-display text-3xl font-bold">Deja tu testimonio</h3>
-            <p className="mt-1 text-sm text-cream/70">Nombre, cómo me conoces y unas líneas sobre cómo fue trabajar conmigo.</p>
-          </div>
           <label className="grid gap-2 text-sm">
             Nombre
             <input name="nombre" required minLength={2} maxLength={80} autoComplete="name" className="rounded-none border-2 border-cream/40 bg-transparent px-3 py-3 text-cream placeholder:text-cream/40" placeholder="Tu nombre" />
