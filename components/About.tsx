@@ -1,14 +1,13 @@
 import { comoTrabajo } from "@/data/perfil";
+import SplitWords from "./SplitWords";
 
 export default function About() {
   return (
     <section id="sobre-mi" className="section relative bg-cream text-ink">
       <div className="wrap grid items-start gap-14 lg:grid-cols-2">
         <div>
-          <h2 data-reveal className="h2 !text-6xl md:!text-8xl">
-            Hola,
-            <br />
-            soy Nicolás.
+          <h2 data-reveal data-split className="h2 !text-6xl md:!text-8xl">
+            <SplitWords lines={["Hola,", "soy Nicolás."]} />
           </h2>
           <p className="mt-8 max-w-[38ch] text-lg leading-relaxed">
             Soy estudiante de ingeniería de software y desarrollo productos de principio a fin: pienso el modelo de datos, diseño la
@@ -20,7 +19,7 @@ export default function About() {
           </p>
         </div>
 
-        <ul className="grid gap-8 lg:mt-24">
+        <ul data-stagger className="grid gap-8 lg:mt-24">
           {comoTrabajo.map((c) => (
             <li key={c.codigo}>
               <div>

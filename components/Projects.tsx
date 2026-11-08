@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { proyectos, type Categoria } from "@/data/projects";
 import FefoDemo from "./FefoDemo";
+import SplitWords from "./SplitWords";
 
 const filtros: { id: Categoria | "todos"; texto: string }[] = [
   { id: "todos", texto: "Todos" },
@@ -14,11 +15,54 @@ const filtros: { id: Categoria | "todos"; texto: string }[] = [
 
 export default function Projects() {
   const [filtro, setFiltro] = useState<Categoria | "todos">("todos");
+  // GSAP + Flip se cargan al montar para que el reacomodo al filtrar sea suave
+  const flip = useRef<{ gsap: any; Flip: any; ScrollTrigger: any } | null>(null);
+  const estadoPrevio = useRef<any>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    (async () => {
+      const { gsap } = await import("gsap");
+      const { Flip } = await import("gsap/Flip");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(Flip, ScrollTrigger);
+      if (vivo) flip.current = { gsap, Flip, ScrollTrigger };
+    })();
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  function elegir(id: Categoria | "todos") {
+    if (id === filtro) return;
+    const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (flip.current && !sinMovimiento) estadoPrevio.current = flip.current.Flip.getState("#grid-proyectos > article");
+    setFiltro(id);
+  }
+
+  useLayoutEffect(() => {
+    const estado = estadoPrevio.current;
+    if (!estado || !flip.current) return;
+    estadoPrevio.current = null;
+    const { gsap, Flip, ScrollTrigger } = flip.current;
+    const tarjetas = gsap.utils.toArray("#grid-proyectos > article");
+    gsap.set(tarjetas, { clearProps: "opacity,transform" });
+    Flip.from(estado, {
+      targets: tarjetas,
+      duration: 0.55,
+      ease: "power2.inOut",
+      absolute: true,
+      onEnter: (els: Element[]) => gsap.fromTo(els, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.15, clearProps: "opacity,transform" }),
+      onComplete: () => ScrollTrigger.refresh(),
+    });
+  }, [filtro]);
 
   return (
     <section id="proyectos" className="section bg-ink text-cream">
       <div className="wrap">
-        <h2 data-reveal className="h2">Galería de proyectos</h2>
+        <h2 data-reveal data-split className="h2">
+          <SplitWords text="Galería de proyectos" />
+        </h2>
         <p className="mt-4 max-w-[46ch] text-cream/70">
           Productos funcionales y trabajo académico de diseño de software.
         </p>
@@ -30,7 +74,7 @@ export default function Projects() {
               type="button"
               data-filter={f.id}
               aria-pressed={filtro === f.id}
-              onClick={() => setFiltro(f.id)}
+              onClick={() => elegir(f.id)}
               className={`rounded-full border-2 px-4 py-2 font-mono text-xs uppercase tracking-wider transition ${
                 filtro === f.id ? "border-sun bg-sun text-ink" : "border-cream/40 hover:border-sun"
               }`}
@@ -52,9 +96,11 @@ export default function Projects() {
                 hidden={!(filtro === "todos" || p.categorias.includes(filtro))}
                 className="grid items-center gap-8 border-t border-cream/15 pt-12 md:grid-cols-12 md:gap-12"
               >
-                <div className={`relative md:col-span-7 ${invertido ? "md:order-2" : ""}`}>
-                  <div aria-hidden="true" className={`absolute inset-0 translate-x-3 translate-y-3 rounded-3xl ${sombra} md:translate-x-5 md:translate-y-5`} />
+                <div data-project-art data-invertido={invertido || undefined} className={`relative md:col-span-7 ${invertido ? "md:order-2" : ""}`}>
+                  <div aria-hidden="true" data-project-shadow className={`absolute inset-0 translate-x-3 translate-y-3 rounded-3xl ${sombra} md:translate-x-5 md:translate-y-5`} />
                   <div
+                    data-project-media
+                    data-interactivo={p.arte === "fefo" || undefined}
                     style={p.fondo ? { backgroundColor: p.fondo } : undefined}
                     className={`relative overflow-hidden rounded-3xl ${p.arte === "fefo" ? "bg-sun min-h-[320px]" : "aspect-[16/10]"}`}
                   >

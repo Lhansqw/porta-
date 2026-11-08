@@ -54,7 +54,6 @@ export const proyectos: Proyecto[] = [
     enlaces: [
       { texto: "Frontend", href: "https://github.com/Kam24w/MindSee-frontend" },
       { texto: "Backend", href: "https://github.com/Kam24w/MindSee-backend" },
-      { texto: "Demo", href: "https://psico-frontend-pi.vercel.app" },
     ],
   },
   {

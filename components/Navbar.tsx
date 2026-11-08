@@ -23,8 +23,8 @@ export default function Navbar() {
       style={{ top: "env(safe-area-inset-top, 0px)" }}
     >
       <div className="wrap flex h-16 items-center justify-between gap-4">
-        <a href="#inicio" className="flex items-center gap-2 font-display text-xl font-black">
-          <Sparkle className="h-6 w-6 text-coral" />
+        <a href="#inicio" data-logo className="flex items-center gap-2 font-display text-xl font-black">
+          <Sparkle data-logo-sparkle className="h-6 w-6 text-coral" />
           {perfil.corto}
         </a>
 

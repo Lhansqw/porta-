@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { relaciones, testimoniosFijos, type Testimonio } from "@/data/testimonials";
+import SplitWords from "./SplitWords";
 
 export default function Testimonials() {
   const [remotos, setRemotos] = useState<Testimonio[]>([]);
@@ -52,7 +53,9 @@ export default function Testimonials() {
   return (
     <section id="testimonios" className="section bg-forest text-cream">
       <div className="wrap">
-        <h2 data-reveal className="h2">{lista.length > 0 ? "Lo que dicen de mi trabajo" : "Deja tu testimonio"}</h2>
+        <h2 data-reveal data-split className="h2">
+          <SplitWords text={lista.length > 0 ? "Lo que dicen de mi trabajo" : "Deja tu testimonio"} />
+        </h2>
         <p className="mt-4 max-w-[48ch] text-cream/75">
           Si trabajamos juntos en un proyecto o una clase, déjame unas palabras. Se publican después de revisarlas.
         </p>

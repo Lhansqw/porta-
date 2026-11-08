@@ -1,11 +1,14 @@
 import { educacion } from "@/data/experience";
+import SplitWords from "./SplitWords";
 
 export default function Experience() {
   return (
     <section id="estudios" className="section bg-pine text-cream">
       <div className="wrap">
-        <h2 data-reveal className="h2 !text-sun">Estudios</h2>
-        <ol className="mt-10 grid gap-8 md:grid-cols-2">
+        <h2 data-reveal data-split className="h2 !text-sun">
+          <SplitWords text="Estudios" />
+        </h2>
+        <ol data-stagger className="mt-10 grid gap-8 md:grid-cols-2">
           {educacion.map((e) => (
             <li key={e.titulo}>
               <div>
