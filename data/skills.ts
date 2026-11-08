@@ -1,5 +1,3 @@
-export const herramientas = ["TS", "JS", "Jv", "Kt", "SQL"];
-
 export type GrupoSkills = { titulo: string; items: string[] };
 
 export const grupos: GrupoSkills[] = [

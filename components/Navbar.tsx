@@ -7,8 +7,9 @@ import Sparkle from "./Sparkle";
 const links = [
   { texto: "Sobre mí", href: "#sobre-mi" },
   { texto: "Proyectos", href: "#proyectos" },
-  { texto: "Testimonios", href: "#testimonios" },
+  { texto: "Habilidades", href: "#habilidades" },
   { texto: "Estudios", href: "#estudios" },
+  { texto: "Testimonios", href: "#testimonios" },
   { texto: "Contacto", href: "#contacto" },
 ];
 
