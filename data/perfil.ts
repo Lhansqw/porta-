@@ -22,7 +22,7 @@ export const perfil: Perfil = {
   correo: "lhanmls37437@gmail.com",
   github: "https://github.com/Lhansqw",
   githubUser: "Lhansqw",
-  foto: null,
+  foto: "/images/me.jpeg",
   frase: "Modelo antes de programar y busco la solución más simple y funcional.",
   intro:
     "Construyo software para problemas reales: una droguería, la Lengua de Señas Colombiana, la deuda técnica de un repositorio.",

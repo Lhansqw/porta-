@@ -27,7 +27,8 @@ export default function Hero() {
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-rust">
             {perfil.foto ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={perfil.foto} alt={`Retrato de ${perfil.nombre}`} className="absolute inset-0 h-full w-full object-cover" />
+              // La imagen trae esquinas negras: se amplía un poco para recortarlas.
+              <img src={perfil.foto} alt={`Retrato de ${perfil.nombre}`} className="absolute inset-0 h-full w-full scale-[1.2] object-cover" />
             ) : (
               <div aria-hidden="true" className="absolute inset-0 grid place-items-center">
                 <span className="font-display font-black leading-none text-cream/90" style={{ fontSize: "clamp(6rem, 18vw, 10rem)" }}>
@@ -35,8 +36,8 @@ export default function Hero() {
                 </span>
               </div>
             )}
-            <p className="absolute inset-x-0 bottom-0 bg-black/85 px-4 py-3 text-sm leading-snug text-cream">{perfil.frase}</p>
           </div>
+          <p className="bg-black px-4 py-3 text-sm leading-snug text-cream">{perfil.frase}</p>
           <Sparkle data-sparkle className="absolute -left-4 -top-5 h-12 w-12 text-sun md:-left-6" />
         </div>
       </div>
