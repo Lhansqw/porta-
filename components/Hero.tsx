@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { perfil } from "@/data/perfil";
 import Sparkle from "./Sparkle";
 
@@ -26,9 +27,14 @@ export default function Hero() {
         <div data-hero-block className="relative mx-auto w-full max-w-[380px] md:col-span-5 md:ml-auto md:mr-0">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-rust">
             {perfil.foto ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              // La imagen trae esquinas negras: se amplía un poco para recortarlas.
-              <img src={perfil.foto} alt={`Retrato de ${perfil.nombre}`} className="absolute inset-0 h-full w-full scale-[1.2] object-cover" />
+              <Image
+                src={perfil.foto}
+                alt={`Retrato de ${perfil.nombre}`}
+                fill
+                priority
+                sizes="(min-width: 768px) 380px, 100vw"
+                className="object-cover object-[50%_40%]"
+              />
             ) : (
               <div aria-hidden="true" className="absolute inset-0 grid place-items-center">
                 <span className="font-display font-black leading-none text-cream/90" style={{ fontSize: "clamp(6rem, 18vw, 10rem)" }}>
