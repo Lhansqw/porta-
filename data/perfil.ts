@@ -9,6 +9,8 @@ export type Perfil = {
   /** Ruta de tu foto dentro de /public, por ejemplo "/images/foto.jpg". Déjalo en null para mostrar el monograma. */
   foto: string | null;
   frase: string;
+  /** Frase que aparece debajo del nombre en la portada. */
+  intro: string;
   cv: string;
 };
 
@@ -22,6 +24,8 @@ export const perfil: Perfil = {
   githubUser: "Lhansqw",
   foto: null,
   frase: "Modelo antes de programar y busco la solución más simple y funcional.",
+  intro:
+    "Construyo software para problemas reales: una droguería, la Lengua de Señas Colombiana, la deuda técnica de un repositorio.",
   cv: "/cv.pdf",
 };
 

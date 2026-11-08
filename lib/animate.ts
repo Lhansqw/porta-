@@ -10,19 +10,10 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
     intro
       .from("[data-nav]", { yPercent: -100, duration: 0.6 })
       .from("[data-hero-title]", { yPercent: 40, opacity: 0, duration: 1, rotate: -1.5 }, "-=0.2")
+      .from("[data-hero-info]", { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.6")
       .from("[data-hero-block]", { y: 60, opacity: 0, duration: 0.8 }, "-=0.6")
-      .from("[data-hero-echo] > *", { y: 30, opacity: 0, duration: 0.7, stagger: 0.12 }, "-=0.6")
-      .from("[data-hero-info] > *", { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.4")
-      .from("[data-sparkle]", { scale: 0, rotate: -90, duration: 0.7, stagger: 0.12, ease: "back.out(2)" }, "-=0.6")
-      .from("[data-scroll-btn]", { scale: 0, duration: 0.6, ease: "back.out(2)" }, "-=0.3");
+      .from("[data-sparkle]", { scale: 0, rotate: -90, duration: 0.7, ease: "back.out(2)" }, "-=0.4");
 
-    // Las estrellas giran lento y el título se desplaza al hacer scroll
-    gsap.to("[data-sparkle]", { rotate: 360, duration: 14, repeat: -1, ease: "none" });
-    gsap.to("[data-hero-title]", {
-      yPercent: -18,
-      ease: "none",
-      scrollTrigger: { trigger: "#inicio", start: "top top", end: "bottom top", scrub: true },
-    });
     gsap.utils.toArray("[data-parallax]").forEach((el: any) => {
       gsap.to(el, {
         yPercent: -20,
