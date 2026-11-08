@@ -1,0 +1,125 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { relaciones, testimoniosFijos, type Testimonio } from "@/data/testimonials";
+import Sparkle from "./Sparkle";
+
+const MINIMO = 3;
+
+export default function Testimonials() {
+  const [remotos, setRemotos] = useState<Testimonio[]>([]);
+  const [activo, setActivo] = useState<boolean | null>(null);
+  const [enviando, setEnviando] = useState(false);
+  const [estado, setEstado] = useState<{ tipo: "ok" | "error"; texto: string } | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    fetch("/api/testimonios")
+      .then((r) => r.json())
+      .then((d) => {
+        if (!vivo) return;
+        setRemotos(d.testimonios ?? []);
+        setActivo(Boolean(d.activo));
+      })
+      .catch(() => vivo && setActivo(false));
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  const lista = [...testimoniosFijos, ...remotos];
+  const vacios = Math.max(0, MINIMO - lista.length);
+
+  async function enviar(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const datos = Object.fromEntries(new FormData(form).entries());
+    setEnviando(true);
+    setEstado(null);
+    try {
+      const res = await fetch("/api/testimonios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error ?? "No se pudo enviar.");
+      form.reset();
+      setEstado({ tipo: "ok", texto: "¡Gracias! Tu testimonio se publicará cuando lo apruebe." });
+    } catch (err) {
+      setEstado({ tipo: "error", texto: err instanceof Error ? err.message : "No se pudo enviar." });
+    } finally {
+      setEnviando(false);
+    }
+  }
+
+  return (
+    <section id="testimonios" className="section bg-forest text-cream">
+      <div className="wrap">
+        <p data-reveal className="eyebrow text-sun">Testimonios</p>
+        <h2 data-reveal className="h2 mt-3">Lo que dicen de mi trabajo</h2>
+        <p data-reveal className="mt-4 max-w-[48ch] text-cream/75">
+          Si trabajamos juntos en un proyecto o una clase, déjame unas palabras. Se publican después de revisarlas.
+        </p>
+
+        <ul data-stagger id="lista-testimonios" className="mt-10 grid gap-6 md:grid-cols-3">
+          {lista.map((t) => (
+            <li key={t.id} className="flex flex-col gap-4 bg-cream p-6 text-ink">
+              <Sparkle className="h-6 w-6 text-coral" />
+              <blockquote className="text-lg leading-snug">“{t.mensaje}”</blockquote>
+              <p className="mt-auto font-mono text-xs uppercase tracking-wider">
+                <span className="font-bold">{t.nombre}</span> · {t.relacion}
+              </p>
+            </li>
+          ))}
+          {Array.from({ length: vacios }).map((_, i) => (
+            <li key={`vacio-${i}`} data-vacio className="flex min-h-[200px] flex-col items-start justify-between gap-4 border-2 border-dashed border-cream/50 p-6">
+              <Sparkle className="h-6 w-6 text-sun" />
+              <p className="text-cream/80">Este espacio es para tu testimonio. Escríbelo con el formulario de abajo.</p>
+              <p className="font-mono text-xs uppercase tracking-wider text-sun">Pendiente</p>
+            </li>
+          ))}
+        </ul>
+
+        <form
+          id="form-testimonio"
+          onSubmit={enviar}
+          data-reveal
+          className="mt-12 grid gap-5 bg-black p-6 md:grid-cols-2 md:p-8"
+        >
+          <div className="md:col-span-2">
+            <h3 className="font-display text-3xl font-bold">Deja tu testimonio</h3>
+            <p className="mt-1 text-sm text-cream/70">Nombre, cómo me conoces y unas líneas sobre cómo fue trabajar conmigo.</p>
+          </div>
+          <label className="grid gap-2 text-sm">
+            Nombre
+            <input name="nombre" required minLength={2} maxLength={80} autoComplete="name" className="rounded-none border-2 border-cream/40 bg-transparent px-3 py-3 text-cream placeholder:text-cream/40" placeholder="Tu nombre" />
+          </label>
+          <label className="grid gap-2 text-sm">
+            Relación conmigo
+            <select name="relacion" required defaultValue="" className="rounded-none border-2 border-cream/40 bg-black px-3 py-3 text-cream">
+              <option value="" disabled>Elige una opción</option>
+              {relaciones.map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </label>
+          <label className="grid gap-2 text-sm md:col-span-2">
+            Mensaje
+            <textarea name="mensaje" required minLength={10} maxLength={600} rows={4} className="rounded-none border-2 border-cream/40 bg-transparent px-3 py-3 text-cream placeholder:text-cream/40" placeholder="Entre 10 y 600 caracteres" />
+          </label>
+          {/* Campo trampa para bots */}
+          <input name="web" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+          <div className="flex flex-wrap items-center gap-4 md:col-span-2">
+            <button type="submit" disabled={enviando} className="btn btn-sun disabled:opacity-60">
+              {enviando ? "Enviando…" : "Enviar testimonio"}
+            </button>
+            <p aria-live="polite" id="estado-testimonio" className={`text-sm ${estado?.tipo === "error" ? "text-coral" : "text-sun"}`}>
+              {estado?.texto ?? (activo === false ? "Los testimonios todavía no están activos en este sitio." : "")}
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}
