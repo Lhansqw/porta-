@@ -1,10 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { relacionTexto, relaciones, testimoniosFijos, type Testimonio } from "@/data/testimonials";
 import { textos } from "@/data/textos";
 import type { Lang } from "@/lib/i18n";
 import SplitWords from "./SplitWords";
+
+const iniciales = (nombre: string) =>
+  nombre
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0].toUpperCase())
+    .join("");
 
 export default function Testimonials({ lang }: { lang: Lang }) {
   const t = textos[lang].testimonials;
@@ -28,7 +37,10 @@ export default function Testimonials({ lang }: { lang: Lang }) {
     };
   }, []);
 
-  const lista = [...testimoniosFijos, ...remotos];
+  const lista: (Testimonio & { foto?: string })[] = [
+    ...testimoniosFijos.filter((f) => !f.borrador).map((f) => ({ ...f, mensaje: f.mensaje[lang] })),
+    ...remotos,
+  ];
 
   async function enviar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -67,11 +79,22 @@ export default function Testimonials({ lang }: { lang: Lang }) {
         {lista.length > 0 && (
         <ul id="lista-testimonios" className="mt-10 grid gap-6 md:grid-cols-3">
           {lista.map((item) => (
-            <li key={item.id} className="flex flex-col gap-4 bg-cream p-6 text-ink">
-              <blockquote className="text-lg leading-snug">“{item.mensaje}”</blockquote>
-              <p className="mt-auto font-mono text-xs uppercase tracking-wider">
-                <span className="font-bold">{item.nombre}</span> · {relacionTexto(item.relacion, lang)}
-              </p>
+            <li key={item.id} className="flex flex-col gap-6 bg-cream p-7 text-ink">
+              <span aria-hidden="true" className="-mb-6 font-menu text-6xl leading-none text-sun">“</span>
+              <blockquote className="text-lg leading-relaxed">{item.mensaje}</blockquote>
+              <div className="mt-auto flex items-center gap-3 border-t border-ink/15 pt-5">
+                {item.foto ? (
+                  <Image src={item.foto} alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-full object-cover" />
+                ) : (
+                  <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink font-mono text-sm font-bold text-cream">
+                    {iniciales(item.nombre)}
+                  </span>
+                )}
+                <p className="leading-tight">
+                  <span className="block font-bold">{item.nombre}</span>
+                  <span className="font-mono text-xs uppercase tracking-wider text-ink/70">{relacionTexto(item.relacion, lang)}</span>
+                </p>
+              </div>
             </li>
           ))}
         </ul>
