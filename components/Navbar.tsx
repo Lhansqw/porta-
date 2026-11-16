@@ -36,12 +36,12 @@ export default function Navbar({ lang }: { lang: Lang }) {
           {perfil.corto}
         </a>
 
-        <nav aria-label={t.principal} className="hidden items-center gap-6 lg:flex">
+        <nav aria-label={t.principal} className="hidden items-center gap-6 xl:flex">
           {t.links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="font-menu text-[0.95rem] font-medium uppercase tracking-[0.12em] text-cream/80 transition hover:text-sun"
+              className="whitespace-nowrap font-menu text-[0.95rem] font-medium uppercase tracking-[0.1em] text-cream/80 transition hover:text-sun"
             >
               {l.texto}
             </a>
@@ -57,7 +57,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
           <button
             type="button"
             data-menu-btn
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full border-2 border-cream/60 lg:hidden"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full border-2 border-cream/60 xl:hidden"
             aria-label={t.abrirMenu}
             aria-expanded={abierto}
             aria-controls="menu-movil"
@@ -70,7 +70,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
         </div>
       </div>
 
-      <div id="menu-movil" data-menu hidden={!abierto} className="border-t border-cream/15 bg-pine lg:hidden">
+      <div id="menu-movil" data-menu hidden={!abierto} className="border-t border-cream/15 bg-pine xl:hidden">
         <ul className="wrap flex flex-col gap-1 py-4">
           {t.links.map((l) => (
             <li key={l.href}>
