@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -8,21 +9,24 @@ import Contact from "@/components/Contact";
 import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import Animations from "@/components/Animations";
+import { esIdioma } from "@/lib/i18n";
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!esIdioma(lang)) notFound();
   return (
     <>
-      <Navbar />
+      <Navbar lang={lang} />
       <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Testimonials />
-        <Contact />
+        <Hero lang={lang} />
+        <About lang={lang} />
+        <Projects lang={lang} />
+        <Skills lang={lang} />
+        <Experience lang={lang} />
+        <Testimonials lang={lang} />
+        <Contact lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
       <Animations />
     </>
   );

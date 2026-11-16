@@ -2,10 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Paleta en canales RGB para que Tailwind pueda aplicar opacidad (bg-ink/50).
+   El modo oscuro es el normal; [data-theme="dark"] también sirve para forzarlo dentro de un bloque. */
+:root,
+[data-theme="dark"] {
+  --ink: 5 7 13;
+  --pine: 10 15 30;
+  --forest: 14 22 48;
+  --cream: 217 222 234;
+  --sun: 111 139 255;
+  --rust: 27 37 80;
+  --coral: 159 180 255;
+  --menu-activo: 255 255 255;
+  --hero-base: #05070D;
+  --hero-vineta: rgba(2, 3, 8, 0.92);
+  --hero-niebla: rgba(79, 107, 255, 0.28);
+  --hero-hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0L34.64 10V30L17.32 40L0 30V10ZM17.32 40V60' fill='none' stroke='%238A9CFF' stroke-opacity='0.16' stroke-width='0.7'/%3E%3C/svg%3E");
+  --linea-brillo: #DCE3FF;
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  --ink: 244 246 251;
+  --pine: 232 236 246;
+  --forest: 221 227 242;
+  --cream: 20 26 46;
+  --sun: 63 91 224;
+  --rust: 201 211 240;
+  --coral: 58 79 184;
+  --menu-activo: 11 18 48;
+  --hero-base: #EEF1F8;
+  --hero-vineta: rgba(214, 221, 238, 0.95);
+  --hero-niebla: rgba(79, 107, 255, 0.2);
+  --hero-hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0L34.64 10V30L17.32 40L0 30V10ZM17.32 40V60' fill='none' stroke='%233F5BE0' stroke-opacity='0.16' stroke-width='0.7'/%3E%3C/svg%3E");
+  --linea-brillo: #3F5BE0;
+  color-scheme: light;
+}
+
 html { scroll-padding-top: 5rem; }
 [hidden] { display: none !important; }
 body { @apply bg-ink font-body text-cream antialiased; }
-::selection { background: #FDB515; color: #0B0B0B; }
+::selection { @apply bg-sun text-ink; }
+
+/* Íconos que solo se ven en un tema */
+[data-theme="light"] .solo-oscuro,
+:root:not([data-theme="light"]) .solo-claro { display: none; }
 
 @layer components {
   .wrap {
@@ -17,10 +57,62 @@ body { @apply bg-ink font-body text-cream antialiased; }
   .eyebrow { @apply font-mono text-xs uppercase tracking-[0.18em]; }
   .h2 { @apply font-display text-4xl font-black leading-[0.95] tracking-tight md:text-6xl; text-wrap: balance; }
   .btn { @apply inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-semibold transition; }
-  .btn-sun { @apply border-ink bg-sun text-ink shadow-[4px_4px_0_#0B0B0B] hover:shadow-[6px_6px_0_#0B0B0B]; }
+  .btn-sun { @apply border-sun bg-sun text-ink shadow-[0_0_0_rgba(79,107,255,0)] hover:shadow-[0_0_28px_rgba(79,107,255,0.65)]; }
   .btn-line { @apply border-cream text-cream hover:bg-cream hover:text-ink; }
   .pill { @apply inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm text-cream; }
-  .text-outline { color: transparent; -webkit-text-stroke: 2px #FDB515; }
+  .text-outline { color: transparent; -webkit-text-stroke: 2px rgb(var(--sun)); }
+
+  /* Fondo de la portada: panal de hexágonos, niebla azul y viñeta */
+  .hex-bg {
+    background-color: var(--hero-base);
+    background-image:
+      radial-gradient(ellipse at center, transparent 35%, var(--hero-vineta) 100%),
+      radial-gradient(ellipse 55% 45% at 62% 42%, var(--hero-niebla), transparent 70%),
+      radial-gradient(ellipse 30% 25% at 20% 75%, rgba(111, 139, 255, 0.12), transparent 70%),
+      var(--hero-hex);
+    background-size: auto, auto, auto, 104px 180px;
+    animation: hex-deriva 90s linear infinite;
+  }
+  @keyframes hex-deriva {
+    to { background-position: 0 0, 0 0, 0 0, 104px 180px; }
+  }
+
+  /* Opciones del menú de la portada: la activa se ilumina con una franja de luz */
+  .menu-item {
+    @apply relative inline-block py-1.5 font-menu text-2xl font-medium uppercase tracking-[0.14em] text-cream/65 transition-colors duration-300 md:text-[1.7rem];
+    isolation: isolate;
+  }
+  .menu-item::before,
+  .menu-item::after {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    right: -45%;
+    top: 50%;
+    z-index: -1;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: 0 50%;
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s;
+    pointer-events: none;
+  }
+  .menu-item::before {
+    height: 2.2em;
+    background:
+      radial-gradient(ellipse 18% 35% at 12% 50%, rgba(220, 228, 255, 0.95), transparent 100%),
+      radial-gradient(ellipse 65% 50% at 30% 50%, rgba(111, 139, 255, 0.95), rgba(79, 107, 255, 0.45) 45%, transparent 78%);
+    filter: blur(7px);
+  }
+  .menu-item::after {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--linea-brillo) 25%, rgba(111, 139, 255, 0.6) 60%, transparent);
+  }
+  /* El brillo de la opción activa ya marca el foco */
+  .menu-item:focus-visible { outline: none; }
+  .menu-item[data-activo] { color: rgb(var(--menu-activo)); text-shadow: 0 0 14px rgba(140, 165, 255, 0.9); }
+  .menu-item[data-activo]::before,
+  .menu-item[data-activo]::after { opacity: 1; transform: translateY(-50%) scaleX(1); }
+
   .focus-ring { @apply focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-sun; }
 }
 a, button, input, select, textarea { @apply focus-ring; }

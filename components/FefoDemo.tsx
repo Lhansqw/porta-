@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { textos } from "@/data/textos";
+import type { Lang } from "@/lib/i18n";
 
 type Lote = { lote: string; vence: string; orden: string; inicial: number };
 
@@ -10,12 +12,12 @@ const LOTES: Lote[] = [
   { lote: "1103", vence: "08/2027", orden: "2027-08", inicial: 40 },
 ];
 
-const MENSAJE_INICIAL = "Pulsa vender: sale primero el lote que vence antes, no el que llegó primero.";
 
-export default function FefoDemo() {
+export default function FefoDemo({ lang }: { lang: Lang }) {
+  const t = textos[lang].fefo;
   const [stock, setStock] = useState<Record<string, number>>(() => Object.fromEntries(LOTES.map((l) => [l.lote, l.inicial])));
   const [activo, setActivo] = useState<string | null>(null);
-  const [mensaje, setMensaje] = useState(MENSAJE_INICIAL);
+  const [mensaje, setMensaje] = useState(t.inicial);
 
   const total = Object.values(stock).reduce((a, b) => a + b, 0);
 
@@ -29,21 +31,21 @@ export default function FefoDemo() {
     setTimeout(() => setActivo(null), 700);
     setMensaje(
       total - 1 === 0
-        ? "Sin existencias en los tres lotes. Reinicia para volver a probar."
-        : `Salió del lote ${l.lote} (vence ${l.vence}), el más próximo a vencer.${quedan === 0 ? " Lote agotado." : ""}`,
+        ? t.sinExistencias
+        : t.salio(l.lote, l.vence) + (quedan === 0 ? t.agotado : ""),
     );
   }
 
   function reiniciar() {
     setStock(Object.fromEntries(LOTES.map((l) => [l.lote, l.inicial])));
-    setMensaje(MENSAJE_INICIAL);
+    setMensaje(t.inicial);
   }
 
   return (
     <div data-fefo className="flex h-full w-full flex-col justify-center gap-3 p-5 font-mono text-xs text-ink md:p-7">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <b className="font-body text-base">Acetaminofén 500 mg</b>
-        <span className="border-[1.5px] border-ink px-1.5 py-0.5 text-[10px] uppercase tracking-wider">datos de ejemplo</span>
+        <b className="font-body text-base">{t.producto}</b>
+        <span className="border-[1.5px] border-ink px-1.5 py-0.5 text-[10px] uppercase tracking-wider">{t.ejemplo}</span>
       </div>
       <ul className="grid gap-2">
         {LOTES.map((l) => {
@@ -59,8 +61,8 @@ export default function FefoDemo() {
                 elegido ? "translate-x-2 bg-ink text-sun" : "bg-white"
               } ${vacio ? "line-through opacity-45" : ""}`}
             >
-              <span className="font-bold">Lote {l.lote}</span>
-              <span>vence {l.vence}</span>
+              <span className="font-bold">{t.lote} {l.lote}</span>
+              <span>{t.vence} {l.vence}</span>
               <span data-qty className="ml-auto font-bold tabular-nums">{stock[l.lote]} u.</span>
             </li>
           );
@@ -68,10 +70,10 @@ export default function FefoDemo() {
       </ul>
       <div className="flex flex-wrap gap-2">
         <button type="button" data-vender onClick={vender} disabled={total === 0} className="border-2 border-ink bg-ink px-3.5 py-2 font-bold uppercase tracking-wide text-sun disabled:cursor-not-allowed disabled:opacity-40">
-          Vender 1 unidad
+          {t.vender}
         </button>
         <button type="button" data-reiniciar onClick={reiniciar} className="border-2 border-ink px-3.5 py-2 font-bold uppercase tracking-wide">
-          Reiniciar
+          {t.reiniciar}
         </button>
       </div>
       <p data-fefo-msg aria-live="polite" className="min-h-[2.8em] leading-snug">{mensaje}</p>

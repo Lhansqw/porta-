@@ -11,9 +11,7 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
     intro
       .from("[data-nav]", { yPercent: -100, duration: 0.6 })
       .from("[data-hero-title] [data-word]", { yPercent: 110, duration: 0.9, stagger: 0.08 }, "-=0.2")
-      .from("[data-hero-info]", { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.6")
-      .from("[data-hero-block]", { y: 60, opacity: 0, duration: 0.8 }, "-=0.6")
-      .from("[data-sparkle]", { scale: 0, rotate: -90, duration: 0.7, ease: "back.out(2)" }, "-=0.4");
+      .from("[data-hero-info]", { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.6");
 
     // Barra de progreso de lectura
     gsap.to("[data-progress]", {
@@ -21,11 +19,6 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
       ease: "none",
       scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.2 },
     });
-
-    // Parallax del hero: la foto y la estrella se mueven a otro ritmo
-    const hero = { trigger: "[data-hero]", start: "top top", end: "bottom top", scrub: 0.4 };
-    gsap.fromTo("[data-parallax]", { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: hero });
-    gsap.to("[data-sparkle-spin]", { rotate: 180, y: -40, ease: "none", scrollTrigger: hero });
 
     // Títulos de sección: cada palabra sube desde abajo de su línea
     $("[data-split]:not([data-hero-title])").forEach((titulo) => {
@@ -114,15 +107,6 @@ export function initAnimations(gsap: any, ScrollTrigger: any): () => void {
     const estrellaLogo = document.querySelector("[data-logo-sparkle]");
     if (logo && estrellaLogo) {
       on(logo, "pointerenter", () => gsap.to(estrellaLogo, { rotate: "+=180", duration: 0.6, ease: "back.out(2)" }));
-    }
-
-    // Estrella del hero: gira según la posición horizontal del cursor
-    const hero = document.querySelector<HTMLElement>("[data-hero]");
-    const estrella = document.querySelector("[data-sparkle]");
-    if (hero && estrella) {
-      const giro = gsap.quickTo(estrella, "rotate", { duration: 0.8, ease: "power3" });
-      on(hero, "pointermove", (e: PointerEvent) => giro((e.clientX / window.innerWidth - 0.5) * 60));
-      on(hero, "pointerleave", () => giro(0));
     }
 
     return () => quitar.forEach((f) => f());

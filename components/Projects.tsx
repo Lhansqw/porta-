@@ -2,18 +2,16 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { proyectos, type Categoria } from "@/data/projects";
+import { textos } from "@/data/textos";
+import type { Lang } from "@/lib/i18n";
 import FefoDemo from "./FefoDemo";
 import SplitWords from "./SplitWords";
 
-const filtros: { id: Categoria | "todos"; texto: string }[] = [
-  { id: "todos", texto: "Todos" },
-  { id: "escritorio", texto: "Escritorio" },
-  { id: "movil", texto: "Móvil" },
-  { id: "web", texto: "Web" },
-  { id: "academico", texto: "Académico" },
-];
+const filtros: (Categoria | "todos")[] = ["todos", "escritorio", "movil", "web", "academico"];
 
-export default function Projects() {
+
+export default function Projects({ lang }: { lang: Lang }) {
+  const t = textos[lang].projects;
   const [filtro, setFiltro] = useState<Categoria | "todos">("todos");
   // GSAP + Flip se cargan al montar para que el reacomodo al filtrar sea suave
   const flip = useRef<{ gsap: any; Flip: any; ScrollTrigger: any } | null>(null);
@@ -61,31 +59,32 @@ export default function Projects() {
     <section id="proyectos" className="section bg-ink text-cream">
       <div className="wrap">
         <h2 data-reveal data-split className="h2">
-          <SplitWords text="Galería de proyectos" />
+          <SplitWords text={t.titulo} />
         </h2>
         <p className="mt-4 max-w-[46ch] text-cream/70">
-          Productos funcionales y trabajo académico de diseño de software.
+          {t.intro}
         </p>
 
-        <div role="group" aria-label="Filtrar proyectos" className="mt-8 flex flex-wrap gap-3">
+        <div role="group" aria-label={t.filtrar} className="mt-8 flex flex-wrap gap-3">
           {filtros.map((f) => (
             <button
-              key={f.id}
+              key={f}
               type="button"
-              data-filter={f.id}
-              aria-pressed={filtro === f.id}
-              onClick={() => elegir(f.id)}
+              data-filter={f}
+              aria-pressed={filtro === f}
+              onClick={() => elegir(f)}
               className={`rounded-full border-2 px-4 py-2 font-mono text-xs uppercase tracking-wider transition ${
-                filtro === f.id ? "border-sun bg-sun text-ink" : "border-cream/40 hover:border-sun"
+                filtro === f ? "border-sun bg-sun text-ink" : "border-cream/40 hover:border-sun"
               }`}
             >
-              {f.texto}
+              {t.filtros[f]}
             </button>
           ))}
         </div>
 
         <div id="grid-proyectos" className="mt-12 grid gap-16 md:gap-24">
           {proyectos.map((p, i) => {
+            const tp = p.textos[lang];
             const invertido = i % 2 === 1;
             const sombra = ["bg-sun", "bg-rust", "bg-coral"][i % 3];
             return (
@@ -101,11 +100,12 @@ export default function Projects() {
                   <div
                     data-project-media
                     data-interactivo={p.arte === "fefo" || undefined}
+                    data-theme={p.arte === "fefo" ? "dark" : undefined}
                     style={p.fondo ? { backgroundColor: p.fondo } : undefined}
                     className={`relative overflow-hidden rounded-3xl ${p.arte === "fefo" ? "bg-sun min-h-[320px]" : "aspect-[16/10]"}`}
                   >
                     {p.arte === "fefo" ? (
-                      <FefoDemo />
+                      <FefoDemo lang={lang} />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={`/arte/${p.arte}`} alt="" className="absolute inset-0 h-full w-full object-contain" />
@@ -115,18 +115,18 @@ export default function Projects() {
 
                 <div className={`min-w-0 md:col-span-5 ${invertido ? "md:order-1" : ""}`}>
                   <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-wider">
-                    <span className="text-sun">{p.etiqueta}</span>
-                    <span className="rounded-full bg-cream/10 px-3 py-1">{p.estado}</span>
+                    <span className="text-sun">{tp.etiqueta}</span>
+                    <span className="rounded-full bg-cream/10 px-3 py-1">{tp.estado}</span>
                   </div>
                   <h3 className="mt-4 font-display text-3xl font-black leading-[1.05] md:text-5xl" style={{ textWrap: "balance" }}>
-                    {p.titulo}
+                    {tp.titulo}
                   </h3>
-                  <p className="mt-4 text-cream/80">{p.descripcion}</p>
+                  <p className="mt-4 text-cream/80">{tp.descripcion}</p>
                   <dl className="mt-5 grid gap-3 text-sm leading-snug text-cream/90">
                     {[
-                      ["Problema", p.problema],
-                      ["Propuesta", p.propuesta],
-                      ["Resultado", p.resultado],
+                      [t.problema, tp.problema],
+                      [t.propuesta, tp.propuesta],
+                      [t.resultado, tp.resultado],
                     ].map(([titulo, texto]) => (
                       <div key={titulo}>
                         <dt className="font-bold text-sun">{titulo}</dt>
@@ -135,7 +135,7 @@ export default function Projects() {
                     ))}
                   </dl>
                   <ul className="mt-5 flex flex-wrap gap-2">
-                    {p.stack.map((st) => (
+                    {(tp.stack ?? p.stack).map((st) => (
                       <li key={st} className="rounded-full bg-cream/10 px-3 py-1 font-mono text-xs">{st}</li>
                     ))}
                   </ul>

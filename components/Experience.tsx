@@ -1,15 +1,17 @@
 import { educacion } from "@/data/experience";
+import { textos } from "@/data/textos";
+import type { Lang } from "@/lib/i18n";
 import SplitWords from "./SplitWords";
 
-export default function Experience() {
+export default function Experience({ lang }: { lang: Lang }) {
   return (
     <section id="estudios" className="section bg-pine text-cream">
       <div className="wrap">
         <h2 data-reveal data-split className="h2 !text-sun">
-          <SplitWords text="Estudios" />
+          <SplitWords text={textos[lang].experience.titulo} />
         </h2>
         <ol data-stagger className="mt-10 grid gap-8 md:grid-cols-2">
-          {educacion.map((e) => (
+          {educacion[lang].map((e) => (
             <li key={e.titulo}>
               <div>
                 <p className="font-display text-2xl font-bold">{e.periodo}</p>

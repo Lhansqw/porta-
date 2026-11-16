@@ -1,3 +1,5 @@
+import type { Lang } from "@/lib/i18n";
+
 export type Testimonio = {
   id: string;
   nombre: string;
@@ -12,4 +14,12 @@ export type Testimonio = {
  */
 export const testimoniosFijos: Testimonio[] = [];
 
-export const relaciones = ["Docente", "Compañero/a de equipo", "Cliente", "Otro"] as const;
+/** El valor en español es el que se guarda; el resto es solo cómo se muestra en cada idioma. */
+export const relaciones: { valor: string; texto: Record<Lang, string> }[] = [
+  { valor: "Docente", texto: { es: "Docente", en: "Teacher" } },
+  { valor: "Compañero/a de equipo", texto: { es: "Compañero/a de equipo", en: "Teammate" } },
+  { valor: "Cliente", texto: { es: "Cliente", en: "Client" } },
+  { valor: "Otro", texto: { es: "Otro", en: "Other" } },
+];
+
+export const relacionTexto =(valor: string, lang: Lang) => relaciones.find((r) => r.valor === valor)?.texto[lang] ?? valor;

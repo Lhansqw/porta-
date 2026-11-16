@@ -1,26 +1,41 @@
-import { comoTrabajo } from "@/data/perfil";
+import Image from "next/image";
+import { comoTrabajo, perfil } from "@/data/perfil";
+import { textos } from "@/data/textos";
+import type { Lang } from "@/lib/i18n";
 import SplitWords from "./SplitWords";
 
-export default function About() {
+export default function About({ lang }: { lang: Lang }) {
+  const t = textos[lang].about;
   return (
     <section id="sobre-mi" className="section relative bg-cream text-ink">
       <div className="wrap grid items-start gap-14 lg:grid-cols-2">
         <div>
           <h2 data-reveal data-split className="h2 !text-6xl md:!text-8xl">
-            <SplitWords lines={["Hola,", "soy Nicolás."]} />
+            <SplitWords lines={t.titulo} />
           </h2>
-          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed">
-            Soy estudiante de ingeniería de software y desarrollo productos de principio a fin: pienso el modelo de datos, diseño la
-            arquitectura y construyo la interfaz.
-          </p>
-          <p className="mt-4 max-w-[38ch] text-lg leading-relaxed">
-            Trabajo con problemas concretos de mi entorno en Colombia, como el control de vencimientos en una droguería o la comunicación en
-            Lengua de Señas Colombiana, y los llevo hasta una aplicación que funciona.
-          </p>
+          {t.parrafos.map((p, i) => (
+            <p key={i} className={`${i === 0 ? "mt-8" : "mt-4"} max-w-[38ch] text-lg leading-relaxed`}>
+              {p}
+            </p>
+          ))}
+          {perfil.foto && (
+            <figure data-reveal className="mt-10 w-full max-w-[300px]">
+              <div className="relative aspect-[4/5] overflow-hidden bg-rust">
+                <Image
+                  src={perfil.foto}
+                  alt={`${t.retrato} ${perfil.nombre}`}
+                  fill
+                  sizes="300px"
+                  className="object-cover object-[50%_40%]"
+                />
+              </div>
+              <figcaption className="bg-ink px-4 py-3 text-sm leading-snug text-cream">{perfil.frase[lang]}</figcaption>
+            </figure>
+          )}
         </div>
 
         <ul data-stagger className="grid gap-8 lg:mt-24">
-          {comoTrabajo.map((c) => (
+          {comoTrabajo[lang].map((c) => (
             <li key={c.codigo}>
               <div>
                 <p className="font-mono text-xs text-rust">{c.codigo}</p>
