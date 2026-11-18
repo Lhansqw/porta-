@@ -27,13 +27,13 @@ export type TestimonioFijo = {
  */
 export const testimoniosFijos: TestimonioFijo[] = [
   {
-    id: "docente",
+    id: "devsprint",
     nombre: "Nombre Apellido",
-    relacion: "Docente",
+    relacion: "Compañero/a de equipo",
     borrador: true,
     mensaje: {
-      es: "Nicolás modela antes de programar. En DevSprint y en el sistema de mensajería urbana llegó con diagramas claros y consistentes entre sí, y en la sustentación supo explicar cada decisión de arquitectura.",
-      en: "Nicolás models before he codes. On DevSprint and the urban courier system he came with clear, mutually consistent diagrams, and in the defense he could explain every architecture decision.",
+      es: "En DevSprint Nicolás se encargó de la arquitectura. Antes de escribir código ya tenía los diagramas listos, y eso nos ayudó a todo el equipo a saber qué le tocaba a cada uno y cómo encajaban las partes.",
+      en: "On DevSprint, Nicolás took charge of the architecture. He had the diagrams ready before anyone wrote code, which helped the whole team know what each of us was responsible for and how the pieces fit together.",
     },
   },
   {
@@ -47,13 +47,13 @@ export const testimoniosFijos: TestimonioFijo[] = [
     },
   },
   {
-    id: "drogueria",
+    id: "mensajeria",
     nombre: "Nombre Apellido",
-    relacion: "Cliente",
+    relacion: "Compañero/a de equipo",
     borrador: true,
     mensaje: {
-      es: "Entendió rápido nuestro problema con los vencimientos. Ahora cada venta sale del lote que vence primero y el sistema funciona aunque se caiga el internet, que era lo que más nos preocupaba.",
-      en: "He quickly understood our problem with expiration dates. Now every sale comes from the batch that expires first, and the system keeps working even when the internet goes down, which was our biggest worry.",
+      es: "Con el sistema de mensajería urbana nos ayudó a ordenar un problema con muchos actores y estados. Sus diagramas UML eran consistentes entre sí y en la exposición explicó cada decisión con claridad.",
+      en: "On the urban courier system he helped us make sense of a problem with many actors and states. His UML diagrams were consistent with each other, and in the presentation he explained every decision clearly.",
     },
   },
 ];
