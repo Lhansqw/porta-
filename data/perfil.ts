@@ -24,7 +24,7 @@ export const perfil: Perfil = {
   correo: "lhanmls37437@gmail.com",
   github: "https://github.com/Lhansqw",
   githubUser: "Lhansqw",
-  foto: "/images/me2.jpg",
+  foto: "/images/foto.jpg",
   frase: {
     es: "Modelo antes de programar y busco la solución más simple y funcional.",
     en: "I model before I code and look for the simplest solution that works.",
