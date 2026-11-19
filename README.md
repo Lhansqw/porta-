@@ -1,4 +1,4 @@
-# Portafolio · Nicolás Ramos López
+# Portafolio · Nicolas Ramos López
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS, listo para publicar en Vercel.
 

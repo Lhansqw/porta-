@@ -17,8 +17,8 @@ export type Perfil = {
 };
 
 export const perfil: Perfil = {
-  nombre: "Nicolás Ramos López",
-  corto: "Nicolás Ramos",
+  nombre: "Nicolas Ramos López",
+  corto: "Nicolas Ramos",
   rol: { es: "Desarrollador de software", en: "Software developer" },
   pais: "Colombia",
   correo: "lhanmls37437@gmail.com",

@@ -32,8 +32,8 @@ export const testimoniosFijos: TestimonioFijo[] = [
     relacion: "Compañero/a de equipo",
     borrador: true,
     mensaje: {
-      es: "En DevSprint Nicolás se encargó de la arquitectura. Antes de escribir código ya tenía los diagramas listos, y eso nos ayudó a todo el equipo a saber qué le tocaba a cada uno y cómo encajaban las partes.",
-      en: "On DevSprint, Nicolás took charge of the architecture. He had the diagrams ready before anyone wrote code, which helped the whole team know what each of us was responsible for and how the pieces fit together.",
+      es: "En DevSprint Nicolas se encargó de la arquitectura. Antes de escribir código ya tenía los diagramas listos, y eso nos ayudó a todo el equipo a saber qué le tocaba a cada uno y cómo encajaban las partes.",
+      en: "On DevSprint, Nicolas took charge of the architecture. He had the diagrams ready before anyone wrote code, which helped the whole team know what each of us was responsible for and how the pieces fit together.",
     },
   },
   {

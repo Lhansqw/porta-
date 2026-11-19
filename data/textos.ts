@@ -30,7 +30,7 @@ const es = {
     cv: { texto: "Descargar CV", ayuda: "Mi hoja de vida en PDF." },
   },
   about: {
-    titulo: ["Hola,", "soy Nicolás."],
+    titulo: ["Hola,", "soy Nicolas."],
     parrafos: [
       "Soy estudiante de ingeniería de software y desarrollo productos de principio a fin: pienso el modelo de datos, diseño la arquitectura y construyo la interfaz.",
       "Trabajo con problemas concretos de mi entorno en Colombia, como el control de vencimientos en una droguería o la comunicación en Lengua de Señas Colombiana, y los llevo hasta una aplicación que funciona.",
@@ -115,7 +115,7 @@ const en: typeof es = {
     cv: { texto: "Download CV", ayuda: "My résumé as a PDF." },
   },
   about: {
-    titulo: ["Hi,", "I'm Nicolás."],
+    titulo: ["Hi,", "I'm Nicolas."],
     parrafos: [
       "I'm a software engineering student and I build products end to end: I think through the data model, design the architecture and build the interface.",
       "I work on concrete problems from my surroundings in Colombia, like tracking expiration dates in a pharmacy or communicating in Colombian Sign Language, and I take them all the way to a working application.",
