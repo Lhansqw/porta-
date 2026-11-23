@@ -7,7 +7,7 @@ Next.js 14 (App Router) + TypeScript + Tailwind CSS, listo para publicar en Verc
 2. `Hero`: bienvenida con botón de descarga del CV (`public/cv.pdf`)
 3. `About`: acerca de mí y datos personales
 4. `Projects`: galería de proyectos con filtros
-5. `Testimonials`: lista y formulario para que los visitantes dejen el suyo
+5. `Testimonials`: tres testimonios fijos
 6. `Experience`: educación y experiencia académica y laboral
 7. `Contact`: contacto con botón para copiar el correo
 8. `Skills`: sección adicional de habilidades técnicas
@@ -21,17 +21,10 @@ Los textos viven en `data/` (perfil, proyectos, experiencia, habilidades, testim
 
 ## Personalizar
 - Tu foto: copia el archivo a `public/images/foto.jpg` y pon `foto: "/images/foto.jpg"` en `data/perfil.ts`.
-- Tu CV: reemplaza `public/cv.pdf` por el tuyo (el actual se generó con los datos del portafolio).
+- Tu CV: `public/cv.pdf` se genera desde `cv/hoja-de-vida.html` (el comando está al principio de ese archivo).
 - Universidad: edita `data/experience.ts`.
 
-## Testimonios de visitantes (opcional)
-1. En Supabase, abre el SQL Editor y ejecuta `supabase/testimonios.sql`.
-2. Copia `.env.example` a `.env.local` y pon `SUPABASE_URL` y `SUPABASE_ANON_KEY`.
-3. En Vercel, agrega las mismas dos variables en Settings > Environment Variables.
-4. Cada testimonio llega con `aprobado = false`. Para publicarlo, ponlo en `true` desde Table Editor.
-
-Sin esas variables el formulario avisa que los testimonios aún no están activos.
-También puedes agregar testimonios fijos en `data/testimonials.ts`.
+- Testimonios: edita `data/testimonials.ts` y pon las fotos en `public/images/testimonios`.
 
 ## Publicar en Vercel
     git init && git add . && git commit -m "Portafolio"

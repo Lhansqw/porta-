@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Hoja de vida · Nicolas Ramos López</title>
+<!--
+  Fuente de public/cv.pdf. Para regenerar el PDF (Windows, con Chrome), desde la raíz del proyecto:
+  "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --no-pdf-header-footer --print-to-pdf="%CD%\public\cv.pdf" "%CD%\cv\hoja-de-vida.html"
+-->
+<style>
+  @page { size: A4; margin: 13mm 16mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.5pt; line-height: 1.38; color: #1a1a1a; }
+  a { color: inherit; text-decoration: none; }
+  header { padding-bottom: 8pt; border-bottom: 1.2pt solid #1a1a1a; }
+  h1 { font-size: 21pt; font-weight: 600; letter-spacing: -0.3pt; }
+  .rol { margin-top: 2pt; font-size: 10.5pt; }
+  .contacto { margin-top: 6pt; color: #444; }
+  .contacto span + span::before { content: "  /  "; color: #999; white-space: pre; }
+  h2 { margin: 11pt 0 5pt; font-size: 8.5pt; font-weight: 700; letter-spacing: 0.5pt; text-transform: uppercase; color: #555; }
+  p + p { margin-top: 4pt; }
+  .item { margin-bottom: 7pt; break-inside: avoid; }
+  .cabeza { display: flex; justify-content: space-between; gap: 12pt; align-items: baseline; }
+  .cabeza strong { font-size: 10.3pt; }
+  .cabeza em { font-style: normal; color: #555; white-space: nowrap; font-size: 9pt; }
+  ul { margin: 3pt 0 0 13pt; }
+  li { margin-top: 1.5pt; }
+  .stack { margin-top: 3pt; color: #555; font-size: 9pt; }
+  table { border-collapse: collapse; }
+  td { padding: 1pt 0; vertical-align: top; }
+  td:first-child { width: 33mm; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nicolas Ramos López</h1>
+  <p class="rol">Desarrollador de software y estudiante de Ingeniería de software</p>
+  <p class="contacto">
+    <span><a href="mailto:lhanmls37437@gmail.com">lhanmls37437@gmail.com</a></span><span><a href="https://github.com/Lhansqw">github.com/Lhansqw</a></span><span>Colombia</span>
+  </p>
+</header>
+
+<h2>Perfil</h2>
+<p>Estudio Ingeniería de software en la Universidad Cooperativa de Colombia. Me gusta hacer aplicaciones completas, desde la base de datos hasta la pantalla, y casi siempre arranco por los diagramas. Hoy tengo tres proyectos propios en desarrollo: un punto de venta para una droguería, un traductor de Lengua de Señas Colombiana y una app que mide la deuda técnica de un repositorio.</p>
+
+<h2>Proyectos</h2>
+
+<div class="item">
+  <div class="cabeza"><strong>POS para droguería</strong><em>Escritorio · en desarrollo</em></div>
+  <ul>
+    <li>Punto de venta en modo kiosco, para un solo usuario, con inventario por lotes.</li>
+    <li>Cada venta se descuenta del lote que vence primero (FEFO), así no se pierde producto vencido.</li>
+    <li>Guarda todo en SQLite en el mismo equipo y no necesita internet.</li>
+  </ul>
+  <p class="stack">Electron, React, TypeScript, SQLite, Zustand, Tailwind CSS</p>
+</div>
+
+<div class="item">
+  <div class="cabeza"><strong>Radar de Deuda Técnica</strong><em>Escritorio (Windows) · en desarrollo</em></div>
+  <ul>
+    <li>Analiza un repositorio de GitHub o una carpeta local y mide su deuda técnica.</li>
+    <li>Explica los resultados con IA (Groq y OpenRouter) sin que el usuario tenga que poner una clave.</li>
+    <li>Las cuentas de usuario se guardan en Supabase.</li>
+  </ul>
+  <p class="stack">TypeScript, Supabase, Groq, OpenRouter · <a href="https://github.com/Lhansqw/radar-deuda">github.com/Lhansqw/radar-deuda</a></p>
+</div>
+
+<div class="item">
+  <div class="cabeza"><strong>Traductor de Lengua de Señas Colombiana</strong><em>Android · en desarrollo</em></div>
+  <ul>
+    <li>Reconoce señas de LSC con la cámara del teléfono y las pasa a texto en español.</li>
+    <li>Lo voy haciendo por partes: primero el reconocimiento con la cámara, después la traducción con Gemini.</li>
+  </ul>
+  <p class="stack">Kotlin, Android, Gemini, visión por computador</p>
+</div>
+
+<div class="item">
+  <div class="cabeza"><strong>MindSee</strong><em>Web · proyecto en equipo</em></div>
+  <ul>
+    <li>Plataforma de acompañamiento emocional: detecta emociones con la cámara, tiene un chat con IA y un panel con el estado de ánimo del paciente.</li>
+    <li>Trabajé en el frontend con React y TypeScript, y en el backend con Java 21, Spring Boot, JWT y PostgreSQL.</li>
+  </ul>
+  <p class="stack">React, TypeScript, Vite, Java 21, Spring Boot, PostgreSQL, Gemini, Groq</p>
+</div>
+
+<div class="item">
+  <div class="cabeza"><strong>Trabajos de la universidad</strong><em>2026</em></div>
+  <ul>
+    <li>DevSprint, un tablero Kanban: diseñé la arquitectura por capas del backend (Spring Boot y JPA) y la documenté con diagramas de componentes y de datos.</li>
+    <li>Sistema de mensajería urbana: hice el modelado UML (casos de uso, clases, secuencia y estados) y lo expuse en la sustentación.</li>
+  </ul>
+</div>
+
+<h2>Educación</h2>
+<div class="item">
+  <div class="cabeza"><strong>Ingeniería de software</strong><em>En curso</em></div>
+  <p>Universidad Cooperativa de Colombia</p>
+</div>
+
+<h2>Herramientas</h2>
+<table>
+  <tr><td>Lenguajes</td><td>TypeScript, JavaScript, Java, Kotlin, SQL</td></tr>
+  <tr><td>Frontend</td><td>React, Next.js, Vite, Tailwind CSS, Zustand</td></tr>
+  <tr><td>Backend</td><td>Spring Boot, Spring Security, JWT, JPA, Electron</td></tr>
+  <tr><td>Bases de datos</td><td>PostgreSQL, Supabase, SQLite</td></tr>
+  <tr><td>IA</td><td>Groq, OpenRouter, Gemini</td></tr>
+  <tr><td>Otros</td><td>UML, Git y GitHub, Vercel</td></tr>
+</table>
+
+</body>
+</html>
